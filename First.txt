@@ -1,0 +1,150 @@
+
+SQL> create table EMP(emp_no number,e_name varchar(20));
+
+Table created.
+
+SQL> insert into EMP(emp_no,e_name)values(1,'Ann');
+
+1 row created.
+
+SQL> select * from EMP;
+
+    EMP_NO E_NAME
+---------- --------------------
+         1 Ann
+
+SQL> alter table EMP add column salary(7,2);
+alter table EMP add column salary(7,2)
+                    *
+ERROR at line 1:
+ORA-00904: : invalid identifier
+
+
+SQL> alter table EMP add salary number(7,2);
+
+Table altered.
+
+SQL> describe emp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMP_NO                                             NUMBER
+ E_NAME                                             VARCHAR2(20)
+ SALARY                                             NUMBER(7,2)
+
+SQL> insert into EMP(emp_no,e_name)vales(2,'Denny');
+insert into EMP(emp_no,e_name)vales(2,'Denny')
+                              *
+ERROR at line 1:
+ORA-00926: missing VALUES keyword
+
+
+SQL> insert into EMP(emp_no,e_name,salary)values(2,'Denny',3456.56);
+
+1 row created.
+
+SQL> insert into EMP(emp_no,e_name,salary)values(3,'Helen',2340.45);
+
+1 row created.
+
+SQL> select * from EMP;
+
+    EMP_NO E_NAME                   SALARY
+---------- -------------------- ----------
+         1 Ann
+         2 Denny                   3456.56
+         3 Helen                   2340.45
+
+SQL> alter table EMP drop column salary
+  2  ;
+
+Table altered.
+
+SQL> select * from EMP;
+
+    EMP_NO E_NAME
+---------- --------------------
+         1 Ann
+         2 Denny
+         3 Helen
+
+SQL> truncate table EMP;
+
+Table truncated.
+
+SQL> select * from EMP;
+
+no rows selected
+
+SQL> describe EMP;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMP_NO                                             NUMBER
+ E_NAME                                             VARCHAR2(20)
+
+SQL> drop table EMP;
+
+Table dropped.
+
+SQL> create table student(roll_no int primary key,fname varchar(15),lname varchar(10),dob date,gender varchar(10));
+
+Table created.
+
+SQL> describe student
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ROLL_NO                                   NOT NULL NUMBER(38)
+ FNAME                                              VARCHAR2(15)
+ LNAME                                              VARCHAR2(10)
+ DOB                                                DATE
+ GENDER                                             VARCHAR2(10)
+
+SQL> insert into student(roll_no,fname,lname,dob,gender)values(01,'Ann','John',03-07-2000,'female');
+insert into student(roll_no,fname,lname,dob,gender)values(01,'Ann','John',03-07-2000,'female')
+                                                                               *
+ERROR at line 1:
+ORA-00932: inconsistent datatypes: expected DATE got NUMBER
+
+
+SQL> insert into student(roll_no,fname,lname,dob,gender)values(01,'Ann','John',2000-03-07,'female');
+insert into student(roll_no,fname,lname,dob,gender)values(01,'Ann','John',2000-03-07,'female')
+                                                                                 *
+ERROR at line 1:
+ORA-00932: inconsistent datatypes: expected DATE got NUMBER
+
+
+SQL> insert into student(roll_no,fname,lname,dob,gender)values(01,'Ann','John',07-may-2000,'female');
+insert into student(roll_no,fname,lname,dob,gender)values(01,'Ann','John',07-may-2000,'female')
+                                                                             *
+ERROR at line 1:
+ORA-00984: column not allowed here
+
+
+ insert into student(roll_no,fname,lname,dob,gender)values(2,'Dijo','George','08 jun 1999','male');
+
+1 row created.
+
+SQL> select * from student where gender='female';
+
+no rows selected
+
+SQL> select * from student
+  2  ;
+
+   ROLL_NO FNAME           LNAME      DOB       GENDER
+---------- --------------- ---------- --------- ----------
+         2 Dijo            George     08-JUN-99 male
+
+SQL> insert into student(roll_no,fname,lname,dob,gender)values(1,'Ann','Hector','07 dec 2000','female');
+
+1 row created.
+
+SQL> select * from student where gender='female';
+
+   ROLL_NO FNAME           LNAME      DOB       GENDER
+---------- --------------- ---------- --------- ----------
+         1 Ann             Hector     07-DEC-00 female
+
+
+SQL> insert into student(roll_no,fname,lname,dob,gender)values(01,'Ann','John','07 may 2000','female');
+
+1 row created.
